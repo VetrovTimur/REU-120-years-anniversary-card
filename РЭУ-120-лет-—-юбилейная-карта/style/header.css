@@ -1,0 +1,38 @@
+.header {
+    width: 100%;
+    padding: 28px 40px 22px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #DBE3EB;
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
+}
+
+.header__nav ul {
+    display: flex;
+    gap: 55px
+}
+
+.header__nav ul li a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F161F;
+}
+
+.header__btn {
+    padding: 15px 29px;
+
+    text-align: center;
+    background: #052D5A;
+    border-radius: 14px;
+
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
