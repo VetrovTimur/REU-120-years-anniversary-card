@@ -1,5 +1,6 @@
-
-/* ===== RESET ===== */
+/* ============================================
+   RESET
+   ============================================ */
 *,
 *::before,
 *::after {
@@ -31,9 +32,11 @@ ol {
     list-style: none;
 }
 
-/* ===== BASE ===== */
+/* ============================================
+   BASE
+   ============================================ */
 body {
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", "Arial", sans-serif;
     background: #f6f8fb;
     padding: 20px 16px;
 }
@@ -46,7 +49,9 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
 }
 
-/* ===== HEADER ===== */
+/* ============================================
+   HEADER
+   ============================================ */
 .header {
     display: flex;
     justify-content: space-between;
@@ -89,7 +94,9 @@ body {
     background: #063a6a;
 }
 
-/* ===== FIRST SCREEN ===== */
+/* ============================================
+   FIRST SCREEN
+   ============================================ */
 .firstScreen {
     padding: 32px 24px 20px;
 }
@@ -132,7 +139,6 @@ body {
     max-width: 320px;
     width: 100%;
 }
-
 .firstScreen__btn {
     display: inline-flex;
     align-items: center;
@@ -151,7 +157,6 @@ body {
 .firstScreen__btn:hover {
     background: #063a6a;
 }
-
 .firstScreen__bonuses {
     display: flex;
     flex-wrap: wrap;
@@ -180,7 +185,9 @@ body {
     line-height: 1.3;
 }
 
-/* ===== CARD INFO ===== */
+/* ============================================
+   CARD INFO
+   ============================================ */
 .cardInf {
     padding: 0 24px 32px;
 }
@@ -231,7 +238,9 @@ body {
     line-height: 1.4;
 }
 
-/* ===== APPLICATION ===== */
+/* ============================================
+   APPLICATION
+   ============================================ */
 .application {
     padding: 24px 24px 40px;
 }
@@ -263,7 +272,6 @@ body {
     color: #5e6b7a;
     line-height: 1.5;
 }
-
 .application__container-form {
     display: flex;
     gap: 30px;
@@ -351,7 +359,6 @@ body {
 .step-right.active {
     display: flex;
 }
-
 .application-form__step-meta {
     color: #094f8c;
     font-weight: 600;
@@ -397,6 +404,10 @@ body {
     font-weight: 500;
     color: #0f161f;
 }
+.required {
+    color: #dc3545;
+    font-weight: 600;
+}
 .form-field__input {
     padding: 11px 14px;
     border: 1px solid #dbe3eb;
@@ -425,12 +436,29 @@ body {
     cursor: not-allowed;
     opacity: 0.7;
 }
+.form-field__input.error {
+    border-color: #dc3545;
+    background: #fff8f8;
+}
+.form-field__input.valid {
+    border-color: #28a745;
+    background: #f8fff8;
+}
 .form-field--half {
     flex: 1;
 }
 .form-field--full {
     flex: none;
     width: 100%;
+}
+.field-error {
+    font-size: 12px;
+    color: #dc3545;
+    min-height: 18px;
+    display: block;
+}
+.field-error.visible {
+    display: block;
 }
 
 /* CHECKBOXES */
@@ -443,6 +471,11 @@ body {
     cursor: pointer;
     line-height: 1.4;
     padding: 4px 0;
+    flex-wrap: wrap;
+}
+.application-form__checkbox-label .field-error {
+    flex: 0 0 100%;
+    margin-left: 32px;
 }
 .application-form__checkbox-input {
     position: absolute;
@@ -554,7 +587,6 @@ body {
     margin-top: 2px;
     line-height: 1.4;
 }
-
 .application-form__section-title {
     font-size: 16px;
     font-weight: 600;
@@ -626,6 +658,10 @@ body {
 }
 .application__btn:hover {
     background: #063a6a;
+}
+.application__btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 .application-success__btn {
     padding: 14px 48px;
@@ -877,7 +913,6 @@ body {
     margin: 0;
     max-width: 280px;
 }
-
 .card-tips {
     display: flex;
     flex-direction: column;
@@ -1049,9 +1084,103 @@ body {
     justify-content: center;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ADMIN PANEL */
+.admin-panel {
+    margin-top: 30px;
+    padding: 24px;
+    background: #f8faff;
+    border-radius: 16px;
+    border: 1px solid #dbe3eb;
+}
+.admin-panel__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f161f;
+    margin-bottom: 12px;
+}
+.admin-panel__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.admin-panel__clear-btn {
+    padding: 10px 20px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.admin-panel__clear-btn:hover {
+    background: #c82333;
+}
+.admin-panel__count {
+    font-size: 14px;
+    color: #5e6b7a;
+    display: flex;
+    align-items: center;
+}
+.excel-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 22px;
+    background: #1e7e34;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.excel-download-btn:hover {
+    background: #166b2a;
+}
+.excel-download-btn svg {
+    flex-shrink: 0;
+}
+.data-table-container {
+    margin-top: 12px;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #dbe3eb;
+}
+.data-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+}
+.data-table-container th {
+    background: #f5f9ff;
+    color: #0f161f;
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #dbe3eb;
+}
+.data-table-container td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #ebf0f5;
+    color: #0f161f;
+}
+.data-table-container tr:hover td {
+    background: #fafcfe;
+}
+.data-table-container .empty-row td {
+    color: #a0b0c0;
+    text-align: center;
+    padding: 30px 16px;
+}
 
-/* Tablet */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 1024px) {
     .application__container-form {
         flex-direction: column;
@@ -1061,9 +1190,6 @@ body {
         flex: none;
         width: 100%;
     }
-    .application__formRight {
-        align-self: stretch;
-    }
     .card-design__options {
         flex-direction: row;
         flex-wrap: wrap;
@@ -1071,9 +1197,6 @@ body {
     .card-design__option {
         flex: 1;
         min-width: 150px;
-    }
-    .card-preview__image {
-        max-width: 260px;
     }
 }
 
@@ -1106,7 +1229,6 @@ body {
     }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     body {
         padding: 12px 10px;
@@ -1114,7 +1236,6 @@ body {
     .container {
         border-radius: 20px;
     }
-
     .header {
         padding: 16px 16px 14px;
         flex-direction: column;
@@ -1136,7 +1257,6 @@ body {
         padding: 10px 20px;
         font-size: 13px;
     }
-
     .firstScreen {
         padding: 20px 16px 16px;
     }
@@ -1162,7 +1282,6 @@ body {
     .bonuses__item p {
         max-width: 100%;
     }
-
     .cardInf {
         padding: 0 16px 24px;
     }
@@ -1182,7 +1301,6 @@ body {
     .content-top {
         font-size: 20px;
     }
-
     .application {
         padding: 16px 16px 32px;
     }
@@ -1192,14 +1310,12 @@ body {
     .application__inf-subtitle {
         font-size: 15px;
     }
-
     .application__formLeft {
         padding: 20px 16px;
     }
     .application__formRight {
         padding: 20px 16px;
     }
-
     .application-form__step-title {
         font-size: 20px;
     }
@@ -1215,7 +1331,6 @@ body {
         flex: none;
         width: 100%;
     }
-
     .step-indicator__label {
         font-size: 10px;
     }
@@ -1224,12 +1339,10 @@ body {
         height: 28px;
         font-size: 11px;
     }
-
     .application__btn {
         width: 100%;
         justify-content: center;
     }
-
     .card-design__options {
         flex-direction: column;
     }
@@ -1243,7 +1356,6 @@ body {
     .card-design__card-price {
         font-size: 22px;
     }
-
     .card-preview__image {
         max-width: 220px;
         padding: 18px 16px;
@@ -1254,7 +1366,6 @@ body {
     .card-preview__title {
         font-size: 22px;
     }
-
     .application-success__title {
         font-size: 24px;
     }
@@ -1271,38 +1382,23 @@ body {
         justify-content: center;
         padding: 14px 20px;
     }
-
     .card-tips__item {
         padding: 14px 14px;
     }
-
-    /* Скрываем правую часть на мобильных для экономии места */
-    .application__formRight {
-        display: none !important;
-    }
-    /* Но показываем для шагов, где это нужно (можно включить по желанию) */
-    /* В данном случае оставляем видимой на планшетах, скрываем только на телефонах */
-}
-
-/* Показываем правую часть на планшетах и десктопах */
-@media (min-width: 769px) {
-    .application__formRight {
-        display: flex !important;
-    }
-}
-
-/* Для мобильных — правую часть вообще не показываем, чтобы не перегружать */
-@media (max-width: 768px) {
     .application__formRight {
         display: none !important;
     }
     .step-right {
         display: none !important;
     }
-    /* Степпер и шаги работают только с левой частью */
 }
 
-/* Планшеты — правую показываем, но компактно */
+@media (min-width: 769px) {
+    .application__formRight {
+        display: flex !important;
+    }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .application__formRight {
         display: flex !important;
