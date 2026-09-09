@@ -173,152 +173,35 @@ function clearErrors() {
 }
 
 // ============================================
-//   ЛЁГКАЯ ЗАЩИТА ОТ ОТЛАДКИ (ИСПРАВЛЕННАЯ)
+//   ЗАЩИТА ОТ ОТЛАДКИ (ТОЛЬКО КЛАВИШИ И ПРАВАЯ КНОПКА)
+//   БЕЗ ПРОВЕРКИ РАЗМЕРОВ ОКНА!
 // ============================================
 
-(function() {
-    let warned = false;
+// Блокировка правой кнопки
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
 
-    // Ждём 3 секунды перед активацией защиты
-    setTimeout(function() {
-        // Блокировка правой кнопки (без alert, просто preventDefault)
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Блокировка клавиш (без alert, просто preventDefault)
-        document.addEventListener('keydown', function(e) {
-            const blockedKeys = [
-                'F12',
-                'F11',
-                'F10',
-                'F9',
-                'F8',
-                'F7',
-                'F6',
-                'F5'
-            ];
-            if (blockedKeys.includes(e.key)) {
-                e.preventDefault();
-                return;
-            }
-            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-                e.preventDefault();
-                return;
-            }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C')) {
-                e.preventDefault();
-                return;
-            }
-        });
-
-        // Проверка на открытую консоль (с задержкой и порогом)
-        let consoleCheckInterval = setInterval(function() {
-            try {
-                // Проверяем только если окно достаточно большое (не мобилка)
-                if (window.innerWidth > 600 && window.innerHeight > 400) {
-                    const heightDiff = window.outerHeight - window.innerHeight;
-                    const widthDiff = window.outerWidth - window.innerWidth;
-                    
-                    // Более строгий порог
-                    if (heightDiff > 300 || widthDiff > 300) {
-                        if (!warned) {
-                            warned = true;
-                            // Показываем только 1 раз
-                            alert('⚠️ Обнаружены открытые инструменты разработчика. Пожалуйста, закройте их для корректной работы.');
-                            // Можно также показать уведомление на странице
-                            showWarningNotification();
-                        }
-                    } else {
-                        // Если консоль закрыли — сбрасываем флаг
-                        if (heightDiff < 200 && widthDiff < 200) {
-                            warned = false;
-                            hideWarningNotification();
-                        }
-                    }
-                }
-            } catch(e) {
-                // Игнорируем ошибки
-            }
-        }, 2000); // Проверяем каждые 2 секунды (не каждую секунду)
-
-        // Если страница загружена в iframe — тоже предупреждение (но без блокировки)
-        try {
-            if (window.top !== window.self) {
-                console.warn('⚠️ Страница открыта во фрейме. Некоторые функции могут быть ограничены.');
-            }
-        } catch(e) {
-            // ignore
-        }
-
-    }, 3000); // Ждём 3 секунды перед активацией защиты
-
-    // ===== ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ (НЕНАВЯЗЧИВОЕ) =====
-    function showWarningNotification() {
-        // Проверяем, есть ли уже такое уведомление
-        if (document.getElementById('devtools-warning')) return;
-
-        const notification = document.createElement('div');
-        notification.id = 'devtools-warning';
-        notification.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            color: #856404;
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            z-index: 10000;
-            max-width: 400px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            animation: slideIn 0.5s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        `;
-        notification.innerHTML = `
-            <span style="font-size:20px;">⚠️</span>
-            <div>
-                <strong>Инструменты разработчика</strong>
-                <p style="margin:4px 0 0 0;font-size:13px;color:#856404;">
-                    Закройте консоль для корректной работы формы.
-                </p>
-            </div>
-            <button onclick="this.parentElement.remove()" style="
-                background:none;
-                border:none;
-                font-size:18px;
-                cursor:pointer;
-                color:#856404;
-                padding:0 4px;
-            ">×</button>
-        `;
-
-        // Добавляем анимацию
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        document.body.appendChild(notification);
+// Блокировка клавиш
+document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return;
     }
-
-    function hideWarningNotification() {
-        const notification = document.getElementById('devtools-warning');
-        if (notification) {
-            notification.remove();
-        }
+    // Ctrl+U
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+        return;
     }
+    // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C')) {
+        e.preventDefault();
+        return;
+    }
+});
 
-})();
+console.log('🔒 Защита от отладки активирована (только блокировка клавиш и правой кнопки)');
 
 // ============================================
 //   ОСНОВНАЯ ЛОГИКА
